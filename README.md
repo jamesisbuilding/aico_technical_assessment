@@ -23,58 +23,7 @@ https://drive.google.com/drive/folders/12QcrMF-wDpXc7IC3BmF13m_jK9wD0jis?usp=sha
     - Here I have used [FlutterGen] with custom [designImage] extension to use typed asset paths rather than hard-coded strings.
 
 
-# Architectural Decisions
-
-1. Modular architecture
-   - I could have put the project in a single package given the size.
-   - However to keep extensibility high, I broke it down into individual packages so new features, dependencies and services can be added with less friction.
-
-2. Navigation split
-   - Imperitive internal feature navigation using [FlowBuilder], isolated to feature scope.
-   - Declarative app-level navigation using [GoRouter].
-   - This is slightly redundant right now given app size, but gives a cleaner path for adding more features/routes.
-
-3. DI and wiring updates
-   - Responder dependencies are now wired through `registerResponderAlertDependencies(getIt)` in app service locator.
-   - Repository is constructor injected (`ResponderRepoImpl(getIt<AlertDataService>())`) rather than custom singleton lifecycle.
-   - This made testing and dependency substitution cleaner.
-
-4. Domain / presentation split
-   - `AlertStatus` in domain is now a pure enum (no UI color/theme concerns).
-   - UI-only mappings are now in view extension (`alert_status_ui.dart`) for color + confirmation labels.
-   - This keeps domain more portable and less coupled to flutter / design-system concerns.
-
-5. BLoC
-   - BLoC still handles our core orchestration for current alert and pending queue.
-   - We now also expose stream failure state through explicit `streamError` in state, rather than yielding synthetic “error alerts” as business data.
-
-6. Local data source behavior
-   - Local source emits deterministic first alert, then generated fire/water alerts.
-   - `updateAlert` is intentionally no-op in this local impl (stubbed local datasource).
-
-7. UI rebuild + animation behavior
-   - We now use `BlocConsumer` (instead of `BlocBuilder` only) in responder card, so scheduling side effects (expand animation timing) live in listener rather than in build.
-   - This avoids build-triggered side effects and keeps build focused on rendering.
-
-8. Animations
-   - Current implementation uses `AnimatedOpacity`, `AnimatedSlide`, `AnimatedSwitcher` as animation needs are fairly simple.
-   - If we need more granular coupled animations later, we can shift to explicit controllers/mixins.
-1. Modular architecture decomposed into ``app`` for interfacing with features via ``GoRouter``, 
-    - Each component is decomposed into its own package following clean architecture.
-    - We remove tight coupling and ease of extension without breaking other parts of the app. 
-2. ``feature/responder`` holds our responder feature, widgets and logic. 
-    - Isolated feature package, containing our BLoC state management, all views (decomposed into flow / pages / widgets)
-    - Flow is place holder here, using flowbuilder within features allows ease of growing the feature internally, without exposing its logic outside of the package bounds. 
-    - ``/domain`` holds all of our 'what we want' from our data. This includes our ``alert_entity.dart`` and our abstract ``responder_repository.dart``
-    - abstract classes include ``responder_repository.dart`` in our domain and ``alert_data_service.dart`` in our data, enforcing compliance with interchangeable data sources should we want to swap any out. 
-    - ``/data`` holds all of our 'how we get data' implementations. As mentioned above, holds our ``alert_model.dart`` which is our DTO between our data source and our internal ``alert_entity.dart``. We also have our mock data source ``local_alert_data_service.dart`` which holds a stream of alerts to be sent at 2 second intervals and ephemerally cached user-side. Again, is an implementation of ``alert_data_service.dart`` and this is what is expected in our repo and BLoC. So we can easily swap this out for real data sources should we want to. 
-    - ``/view`` holds all our UI implementation and associated logic. As mentioned above, flow is our internal feature navigation, pages holds all our individual pages, and widgets holds all of our feature-specific widgets. Note: should we want to have app-wide common widgets, these would be moved to our ``design_system``
-    - ``/view/widgets/responder_card/`` - this is the bulk of the implementation, holding all of our widget code. 
-3. ``core/design_system`` contains all of our styling, fonts, icons and videos. 
-    - Here I have used ``FlutterGen`` with custom ``designImage`` extension to use as paths rather than hard-coded strings. 
-
-
-#  Architectural Decisions
+#  Architectural Decisions / Implementation Notes
 1. Modular architecture - I could have put the project in a single package given its size. However to ensure ease of extensibility I have broken it down into individual packages so new features, dependencies and services can be added.
 
 2. I have used imperitive navigation for internal feature navigation using ``FlowBuilder``, isolated to each (just one at the moment) feature. I have used declarative navigation using ``GoRouter``. This is redundant right now due to the size of the app and being single-screen but allows ease of additional feature integration when / if needed. 
