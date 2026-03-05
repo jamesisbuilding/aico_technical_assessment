@@ -17,7 +17,7 @@ class ResponderFlow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetIt.instance<ResponderBloc>()..add(streamAlertsEvent()),
+      create: (context) => GetIt.instance<ResponderBloc>()..add(StreamAlertsEvent()),
       child: FlowBuilder<ResponderStep>(
         state: ResponderStep.responder,
         onGeneratePages: (ResponderStep state, List<Page<dynamic>> pages) {
