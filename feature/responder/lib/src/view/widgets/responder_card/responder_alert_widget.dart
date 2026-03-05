@@ -5,6 +5,7 @@ import 'package:responder/src/domain/model/alert_entity.dart';
 import 'package:responder/src/view/bloc/responder_bloc.dart';
 import 'package:responder/src/view/bloc/responder_event.dart';
 import 'package:responder/src/view/bloc/responder_state.dart';
+import 'package:responder/src/view/widgets/responder_card/alert_status_ui.dart';
 import 'package:responder/src/view/widgets/responder_card/responder_alert_header.dart';
 import 'package:responder/src/view/widgets/responder_card/responder_body.dart';
 
@@ -18,11 +19,7 @@ class ResponderAlertCard extends StatefulWidget {
 class _ResponderAlertCardState extends State<ResponderAlertCard> {
   bool _expanded = false;
   bool _shouldExit = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  bool _isSchedulingExpand = false;
 
   Future<void> _toggleExit() async {
     setState(() {
@@ -39,17 +36,34 @@ class _ResponderAlertCardState extends State<ResponderAlertCard> {
     });
   }
 
-  Future<void> _toggleExpanded() async {
-    await Future.delayed(const Duration(seconds: 1));
-    setState(() {
-      _expanded = !_expanded;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return BlocBuilder<ResponderBloc, ResponderState>(
+    return BlocConsumer<ResponderBloc, ResponderState>(
+      listenWhen: (previous, current) =>
+          previous.currentAlert != current.currentAlert,
+      listener: (context, state) {
+        if (state.currentAlert == null) {
+          _isSchedulingExpand = false;
+          return;
+        }
+
+        if (!_expanded && !_shouldExit && !_isSchedulingExpand) {
+          _isSchedulingExpand = true;
+          Future<void>.delayed(const Duration(seconds: 1), () {
+            if (!mounted) return;
+            if (context.read<ResponderBloc>().state.currentAlert == null) {
+              _isSchedulingExpand = false;
+              return;
+            }
+            setState(() {
+              _expanded = true;
+              _isSchedulingExpand = false;
+            });
+          });
+        }
+      },
       buildWhen: (prev, curr) => prev.currentAlert != curr.currentAlert,
       builder: (context, state) {
         final double height = state.currentAlert?.status == AlertStatus.resolved
@@ -64,9 +78,6 @@ class _ResponderAlertCardState extends State<ResponderAlertCard> {
             ? Offset(0, 0)
             : Offset(1, 0);
 
-        if (state.currentAlert != null && !_expanded && !_shouldExit) {
-          _toggleExpanded();
-        }
         return AnimatedSlide(
           duration: const Duration(milliseconds: 250),
           offset: offset,
