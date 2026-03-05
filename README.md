@@ -45,4 +45,4 @@ https://drive.google.com/drive/folders/12QcrMF-wDpXc7IC3BmF13m_jK9wD0jis?usp=sha
 
 12. UI Tweaks - right now the expanded card view is single size and is scrollable - however I would ensure that the expanded version always fits the amount of action buttons that are available to ensure visual consistency. As code architecture and implementation details are the priority here I have omitted this refactor. 
 
-13. Stream v Future - initially I used a Future to fetch a single alert, however it made more sense to use a stream, as I'd anticipate the user wanting to receive updates automatically instead of having to manually refresh. 
+13. Stream v Future - initially I used a Future to fetch a single alert, however it made more sense to use a stream, as I'd anticipate the user wanting to receive updates automatically instead of having to manually refresh. Note our UI only updates when the current alert is updated, not whenever we receive an alert, thus minimising rebuilds and ensuring performance. 
