@@ -1,6 +1,7 @@
 import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:responder/src/domain/model/alert_entity.dart';
+import 'package:responder/src/view/widgets/responder_card/alert_status_ui.dart';
 
 class ResponderAlertHeader extends StatelessWidget {
   final Alert? alert;

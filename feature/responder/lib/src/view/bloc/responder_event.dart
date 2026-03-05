@@ -3,7 +3,7 @@ import 'package:responder/src/domain/model/responder_action.dart';
 
 sealed class ResponderEvent {}
 
-class streamAlertsEvent extends ResponderEvent {}
+class StreamAlertsEvent extends ResponderEvent {}
 
 class HandleResponseAction extends ResponderEvent {
   final ResponderAction action;

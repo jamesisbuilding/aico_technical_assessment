@@ -10,60 +10,74 @@ class ResponderBloc extends Bloc<ResponderEvent, ResponderState> {
   ResponderBloc({required ResponderRepository repo})
     : _repo = repo,
       super(ResponderState.empty()) {
-    on<streamAlertsEvent>(_streamAlertsEvent);
+    on<StreamAlertsEvent>(_streamAlertsEvent);
     on<HandleResponseAction>(_handleResponseAction);
     on<UpdateAlertEvent>(_updateAlertEvent);
     on<UpdateAlertFromPending>(_updateAlertFromPending);
   }
 
-  _streamAlertsEvent(event, emit) async {
+  Future<void> _streamAlertsEvent(
+    StreamAlertsEvent event,
+    Emitter<ResponderState> emit,
+  ) async {
     await emit.forEach<Alert>(
       _repo.streamAlerts(),
       onData: (alert) {
         if (state.currentAlert != null) {
-          List<Alert> pendingAlerts = List.from(state.pendingAlerts);
-          pendingAlerts.add(alert);
+          final pendingAlerts = List<Alert>.from(state.pendingAlerts)..add(alert);
           return state.copyWith(pendingAlerts: pendingAlerts);
-        } else {
-          return state.copyWith(currentAlert: alert);
         }
+        return state.copyWith(currentAlert: alert, streamError: null);
+      },
+      onError: (error, stackTrace) {
+        return state.copyWith(streamError: error.toString());
       },
     );
   }
 
-  _handleResponseAction(event, emit) {
+  void _handleResponseAction(
+    HandleResponseAction event,
+    Emitter<ResponderState> emit,
+  ) {
     switch (event.action) {
       case ResponderAction.aOk:
+        final currentAlert = state.currentAlert;
+        if (currentAlert == null) return;
         add(
           UpdateAlertEvent(
-            alert: state.currentAlert!.copyWith(status: AlertStatus.resolved),
+            alert: currentAlert.copyWith(status: AlertStatus.resolved),
           ),
         );
       case ResponderAction.goProperty:
       case ResponderAction.noVisit:
       case ResponderAction.callDr:
+      case ResponderAction.callPlumber:
+      case ResponderAction.callFireServices:
         return;
     }
   }
 
-  _updateAlertEvent(event, emit) async {
+  Future<void> _updateAlertEvent(
+    UpdateAlertEvent event,
+    Emitter<ResponderState> emit,
+  ) async {
     if (event.alert != null) {
-      await _repo.updateAlert(alert: event.alert);
+      await _repo.updateAlert(alert: event.alert!);
     } else {
       add(UpdateAlertFromPending());
     }
     emit(state.copyWith(currentAlert: event.alert));
   }
 
-  _updateAlertFromPending(event, emit) async {
+  Future<void> _updateAlertFromPending(
+    UpdateAlertFromPending event,
+    Emitter<ResponderState> emit,
+  ) async {
     await Future.delayed(const Duration(seconds: 1));
     if (state.pendingAlerts.isNotEmpty) {
-      List<Alert> pendingAlerts = List.from(state.pendingAlerts);
-      Alert nextAlert = pendingAlerts[0];
-      pendingAlerts.removeAt(0);
-      emit(
-        state.copyWith(currentAlert: nextAlert, pendingAlerts: pendingAlerts),
-      );
+      final pendingAlerts = List<Alert>.from(state.pendingAlerts);
+      final nextAlert = pendingAlerts.removeAt(0);
+      emit(state.copyWith(currentAlert: nextAlert, pendingAlerts: pendingAlerts));
     }
   }
 }
