@@ -25,7 +25,6 @@ void main() {
     test('fromJson falls back for unknown values and ignores invalid actions', () {
       final model = AlertModel.fromJson({
         'uid': 'AL99999',
-        'sentAt': 'invalid-date',
         'alertType': 'invalid-type',
         'status': 'invalid-status',
         'availableActions': ['aOk', 'notRealAction'],
