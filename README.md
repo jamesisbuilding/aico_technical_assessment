@@ -1,7 +1,9 @@
 # aico_technical_assessment
 
-You can find my implementation and .apk here : 
+You can find my implementation and .apk here:  
 https://drive.google.com/drive/folders/12QcrMF-wDpXc7IC3BmF13m_jK9wD0jis?usp=sharing
+
+
 
 # Implementation Details
 
@@ -39,7 +41,7 @@ https://drive.google.com/drive/folders/12QcrMF-wDpXc7IC3BmF13m_jK9wD0jis?usp=sha
 
 9. More smaller details - I have used BlocBuilder that only builds when our currentAlert changes. Thus reducing rebuilds when we recieve data va our stream and add alerts to our queue. 
 
-10. Animations - Here I have used ``AnimatedOpacity``, ``AnimatedSlide`` and ``AnimatedSwitcher`` for our card animations as the animation is quite simple. However should we want more granular and custom animations I would of course use ``AnimationController``, ``Animation`` and ``SingleTickerProviderMixin`` should we have animations that are nuanced and coupled (such as scrolling on a screen and causing the animation to progess based on our scroll %)
+10. Animations - Here I have used ``AnimatedOpacity``, ``AnimatedSlide`` and ``AnimatedSwitcher`` for our card animations with a custom curve to match our vibe of the confirmation button. However should we want more granular and custom animations I would of course use ``AnimationController``, ``Animation`` and ``SingleTickerProviderMixin`` should we have animations that are nuanced and coupled (such as scrolling on a screen and causing the animation to progess based on our scroll %)
 
 11. Testing - I have used Codex to write our tests and I have verified them manually. Right now only testing our UI and BLoC. However for a full testing suite I would aim for 90%+ business logic coverage with widget, unit, integration tests and golden tests for our UI on various screens. Integration and Golden Tests are especially important here due to the safety-critical nature of the alerts, we must ensure users always get the alerts in a timely manner and they can actually see the alerts on any device they have can access the app on - especially the card UI must remain clearly visible if we plan on extending or modifying our features. 
 
@@ -47,3 +49,14 @@ https://drive.google.com/drive/folders/12QcrMF-wDpXc7IC3BmF13m_jK9wD0jis?usp=sha
 
 13. Stream v Future - initially I used a Future to fetch a single alert, however it made more sense to use a stream, as I'd anticipate the user wanting to receive updates automatically instead of having to manually refresh. Note our UI only updates when the current alert is updated, not whenever we receive an alert, thus minimising rebuilds and ensuring performance. 
 
+---
+
+## ⚠️ Android Video Playback Note
+
+The confirmation animation in this app relies on the Flutter `video_player` package, which in turn uses Media3 / ExoPlayer under the hood.
+
+For testing, I used the standard Android emulator. Please note that the emulator’s software decoder (`c2.goldfish.h264.decoder`) failed to render video playback correctly—showing corrupted frames and frequent codec/configuration errors. This is a known limitation with the Android emulator’s media stack and does **not** necessarily reflect how things work on real Android devices.
+
+Unfortunately, at this time I do not have access to a physical Android device for direct verification. The animation video included is a standard H.264 MP4, which is well-supported by hardware media decoders on real devices, so it should play smoothly on actual Android phones/tablets. However, please keep in mind this caveat if you encounter playback issues in emulators.
+
+---
