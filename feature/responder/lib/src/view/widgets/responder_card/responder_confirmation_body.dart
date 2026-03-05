@@ -18,24 +18,25 @@ class _ConfirmationBodyState extends State<ConfirmationBody> {
   @override
   void initState() {
     super.initState();
-    _videoController = VideoPlayerController.asset(
-      'assets/video/home_link_tick.mp4',
-      package: 'design_system',
-    )..setLooping(false)
-     ..initialize().then((_) {
-        setState(() {}); // Refresh to show the first frame once initialized
-        Future.delayed(const Duration(seconds: 1), () {
-          // Play after 1 second delay
-          if (mounted) {
-            _videoController.play();
-            setState(() {
-              _isVideoPlayed = true;
+    _videoController =
+        VideoPlayerController.asset(
+            Assets.video.homeLinkTick,
+            package: 'design_system',
+          )
+          ..setLooping(false)
+          ..initialize().then((_) {
+            setState(() {});
+            Future.delayed(const Duration(seconds: 1), () {
+              if (mounted) {
+                _videoController.play();
+                setState(() {
+                  _isVideoPlayed = true;
+                });
+
+                _videoController.addListener(_onVideoUpdate);
+              }
             });
-            // Listen for completion
-            _videoController.addListener(_onVideoUpdate);
-          }
-        });
-      });
+          });
   }
 
   void _onVideoUpdate() {
