@@ -27,7 +27,10 @@ AlertModel _buildModel() => AlertModel(
   address: '1 Test Street',
   senderName: 'Test User',
   status: AlertStatus.active,
-  availableActions: const [ResponderAction.aOk, ResponderAction.callFireServices],
+  availableActions: const [
+    ResponderAction.aOk,
+    ResponderAction.callFireServices,
+  ],
 );
 
 void main() {
@@ -37,35 +40,41 @@ void main() {
 
     setUpAll(() {
       service = _FakeAlertDataService();
-      ResponderRepoImpl.init(service);
-      repo = ResponderRepoImpl.instance;
+
+      repo = ResponderRepoImpl(service);
     });
 
     tearDownAll(() async {
       await service.controller.close();
     });
 
-    test('streamAlerts exposes Alert entities from data service stream', () async {
-      final model = _buildModel();
-      Future<Alert> firstAlert = repo.streamAlerts().first;
+    test(
+      'streamAlerts exposes Alert entities from data service stream',
+      () async {
+        final model = _buildModel();
+        Future<Alert> firstAlert = repo.streamAlerts().first;
 
-      service.controller.add(model);
+        service.controller.add(model);
 
-      final alert = await firstAlert;
-      expect(alert, isA<Alert>());
-      expect(alert.uid, model.uid);
-      expect(alert.alertType, AlertType.fire);
-    });
+        final alert = await firstAlert;
+        expect(alert, isA<Alert>());
+        expect(alert.uid, model.uid);
+        expect(alert.alertType, AlertType.fire);
+      },
+    );
 
-    test('updateAlert converts entity to model and forwards to data service', () async {
-      final alert = _buildModel();
+    test(
+      'updateAlert converts entity to model and forwards to data service',
+      () async {
+        final alert = _buildModel();
 
-      await repo.updateAlert(alert: alert);
+        await repo.updateAlert(alert: alert);
 
-      expect(service.updatedAlert, isNotNull);
-      expect(service.updatedAlert!.uid, alert.uid);
-      expect(service.updatedAlert!.status, alert.status);
-      expect(service.updatedAlert!.availableActions, alert.availableActions);
-    });
+        expect(service.updatedAlert, isNotNull);
+        expect(service.updatedAlert!.uid, alert.uid);
+        expect(service.updatedAlert!.status, alert.status);
+        expect(service.updatedAlert!.availableActions, alert.availableActions);
+      },
+    );
   });
 }

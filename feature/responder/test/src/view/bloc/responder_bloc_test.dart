@@ -41,7 +41,7 @@ void main() {
       final repo = _FakeResponderRepository(controller.stream);
       final bloc = ResponderBloc(repo: repo);
 
-      bloc.add(streamAlertsEvent());
+      bloc.add(StreamAlertsEvent());
       final first = _buildAlert('A1');
       final second = _buildAlert('A2', type: AlertType.fire);
       controller
@@ -82,7 +82,7 @@ void main() {
       final first = _buildAlert('A1');
       final second = _buildAlert('A2');
 
-      bloc.add(streamAlertsEvent());
+      bloc.add(StreamAlertsEvent());
       controller
         ..add(first)
         ..add(second);
