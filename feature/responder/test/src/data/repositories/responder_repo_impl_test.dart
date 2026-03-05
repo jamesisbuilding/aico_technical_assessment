@@ -35,12 +35,13 @@ void main() {
     late _FakeAlertDataService service;
     late ResponderRepoImpl repo;
 
-    setUp(() {
+    setUpAll(() {
       service = _FakeAlertDataService();
-      repo = ResponderRepoImpl(service);
+      ResponderRepoImpl.init(service);
+      repo = ResponderRepoImpl.instance;
     });
 
-    tearDown(() async {
+    tearDownAll(() async {
       await service.controller.close();
     });
 
@@ -65,22 +66,6 @@ void main() {
       expect(service.updatedAlert!.uid, alert.uid);
       expect(service.updatedAlert!.status, alert.status);
       expect(service.updatedAlert!.availableActions, alert.availableActions);
-    });
-
-    test('uses the instance injected at construction time', () async {
-      final secondService = _FakeAlertDataService();
-      final secondRepo = ResponderRepoImpl(secondService);
-
-      final alertForFirstRepo = _buildModel().copyWith(uid: 'FIRST1');
-      final alertForSecondRepo = _buildModel().copyWith(uid: 'SECOND1');
-
-      await repo.updateAlert(alert: alertForFirstRepo);
-      await secondRepo.updateAlert(alert: alertForSecondRepo);
-
-      expect(service.updatedAlert?.uid, 'FIRST1');
-      expect(secondService.updatedAlert?.uid, 'SECOND1');
-
-      await secondService.controller.close();
     });
   });
 }

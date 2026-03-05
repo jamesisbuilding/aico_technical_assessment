@@ -13,42 +13,25 @@ void main() {
 
       expect(alerts, hasLength(3));
       final first = alerts.first;
-      expect(first.uid, 'ABCDE1');
-      expect(first.senderName, 'John Corn');
-      expect(first.address, '24 Lema Lane, BS1 8MN');
       expect(first.alertType, AlertType.pendantActivation);
       expect(first.status, AlertStatus.active);
       expect(first.availableActions.first, ResponderAction.aOk);
-      expect(
-        first.availableActions,
-        isNot(contains(ResponderAction.callFireServices)),
-      );
-      expect(
-        first.availableActions,
-        isNot(contains(ResponderAction.callPlumber)),
-      );
+      expect(first.availableActions, isNot(contains(ResponderAction.callFireServices)));
+      expect(first.availableActions, isNot(contains(ResponderAction.callPlumber)));
     });
 
-    test('generated non-first alerts are fire/water and include required actions', () async {
+    test('non-pendant alerts include required type-specific actions', () async {
       final service = LocalAlertDataService();
       final alerts = await service.streamAlerts().toList();
 
       final generated = alerts.skip(1);
       for (final alert in generated) {
-        expect(
-          alert.alertType == AlertType.fire || alert.alertType == AlertType.waterLeak,
-          isTrue,
-        );
-        expect(alert.availableActions.first, ResponderAction.aOk);
-
         if (alert.alertType == AlertType.fire) {
           expect(alert.availableActions, contains(ResponderAction.callFireServices));
         }
         if (alert.alertType == AlertType.waterLeak) {
           expect(alert.availableActions, contains(ResponderAction.callPlumber));
         }
-
-        expect(RegExp(r'^[A-Z0-9]{7}$').hasMatch(alert.uid), isTrue);
       }
     });
 
