@@ -25,7 +25,7 @@ https://drive.google.com/drive/folders/12QcrMF-wDpXc7IC3BmF13m_jK9wD0jis?usp=sha
 
 2. I have used imperitive navigation for internal feature navigation using ``FlowBuilder``, isolated to each (just one at the moment) feature. I have used declarative navigation using ``GoRouter``. This is redundant right now due to the size of the app and being single-screen but allows ease of additional feature integration when / if needed. 
 
-3. In our local data source I have added try / catches and throws an empty alert if the data is malformed or we are unable to fetch our alert. I understand in real-world deployment this is a safety-critical system and this would not suffice. We would need to retry fetching and have client-server communication to ensure client's data is fully updated with the most recent data in the database, having immediate consistency of data and implementing structured retry logic with manual (user triggered) retry coupled with internal retry logic. 
+3. In our local data source I have added try / catches and throws an empty alert if the data is malformed or we are unable to fetch our alert. I understand in real-world deployment this is a safety-critical system and this would not suffice. We would need to retry fetching and have client-server communication to ensure client's data is fully updated with the most recent data in the database, having immediate consistency of data and implementing structured retry logic with manual (user triggered via a dialog saying fetching failed) retry coupled with internal retry logic. 
 
 4. Right now I have the alert data source in the feature package. Should this service be required app wide, I would restructure and put it in ``core/services/alert_data_service`` - thus exposing it to any feature that requires it via import in ``pubspec.yaml``. 
 
@@ -46,3 +46,4 @@ https://drive.google.com/drive/folders/12QcrMF-wDpXc7IC3BmF13m_jK9wD0jis?usp=sha
 12. UI Tweaks - right now the expanded card view is single size and is scrollable - however I would ensure that the expanded version always fits the amount of action buttons that are available to ensure visual consistency. As code architecture and implementation details are the priority here I have omitted this refactor. 
 
 13. Stream v Future - initially I used a Future to fetch a single alert, however it made more sense to use a stream, as I'd anticipate the user wanting to receive updates automatically instead of having to manually refresh. Note our UI only updates when the current alert is updated, not whenever we receive an alert, thus minimising rebuilds and ensuring performance. 
+
