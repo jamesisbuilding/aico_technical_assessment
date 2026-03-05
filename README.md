@@ -118,7 +118,7 @@ Within the BLoC an ephemeral cache stores incoming alerts that have not yet been
 
 This allows alerts to be queued and displayed sequentially.
 
-A more robust implementation would persist this cache in local storage so that alerts remain available even if the application is closed or the device temporarily loses connectivity.
+A more robust implementation would persist this cache in local storage so that alerts remain available even if the application is closed and the device temporarily loses connectivity.
 
 ### 7. Alert Action Mapping
 
