@@ -27,10 +27,7 @@ class ResponderBloc extends Bloc<ResponderEvent, ResponderState> {
           final pendingAlerts = List<Alert>.from(state.pendingAlerts)..add(alert);
           return state.copyWith(pendingAlerts: pendingAlerts);
         }
-        return state.copyWith(currentAlert: alert, streamError: null);
-      },
-      onError: (error, stackTrace) {
-        return state.copyWith(streamError: error.toString());
+        return state.copyWith(currentAlert: alert);
       },
     );
   }
