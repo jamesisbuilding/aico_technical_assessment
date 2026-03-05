@@ -1,8 +1,4 @@
-import 'dart:ui';
-
 import 'package:equatable/equatable.dart';
-import 'package:design_system/design_system.dart';
-import 'package:flutter/material.dart';
 import 'package:responder/src/domain/model/responder_action.dart';
 
 class Alert extends Equatable {
@@ -80,13 +76,4 @@ enum AlertType {
   );
 }
 
-enum AlertStatus {
-  idle(color: Colors.white),
-  active(color: AppTheme.alert),
-  resolved(color: AppTheme.success, confirmationLabel: 'Resolved');
-
-  const AlertStatus({required this.color, this.confirmationLabel});
-
-  final Color color;
-  final String? confirmationLabel;
-}
+enum AlertStatus { idle, active, resolved }

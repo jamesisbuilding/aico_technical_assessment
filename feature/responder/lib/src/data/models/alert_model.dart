@@ -24,39 +24,36 @@ class AlertModel extends Alert {
   );
 
   factory AlertModel.fromJson(Map<String, dynamic> json) {
-    List<ResponderAction> availableActions = [];
+    final List<ResponderAction> availableActions = [];
 
-    if (json['availableActions'] != null) {
-      for (var jsonAction in json['availableActions']) {
-        try {
-          ResponderAction? action = ResponderAction.values.firstWhere(
-            (a) => a.name == jsonAction,
-          );
-          availableActions.add(action);
-        } catch (e) {
+    final dynamic rawActions = json['availableActions'];
+    if (rawActions is Iterable) {
+      for (final jsonAction in rawActions) {
+        final matchingActions = ResponderAction.values.where((a) => a.name == jsonAction);
+        if (matchingActions.isNotEmpty) {
+          availableActions.add(matchingActions.first);
+        } else {
           debugPrint('Failed to assign action');
         }
       }
     }
+
+    final sentAt = DateTime.tryParse('${json['sentAt'] ?? ''}') ??
+        DateTime.fromMillisecondsSinceEpoch(0);
+
     return AlertModel(
-      uid: json['uid'] ?? '',
-      sentAt: json['sentAt'] != null
-          ? DateTime.parse(json['sentAt'])
-          : DateTime.fromMillisecondsSinceEpoch(0),
-      alertType: json['alertType'] != null
-          ? AlertType.values.firstWhere(
-              (e) => e.name == json['alertType'],
-              orElse: () => AlertType.unknown,
-            )
-          : AlertType.unknown,
-      address: json['address'] ?? '',
-      senderName: json['senderName'] ?? '',
-      status: json['status'] != null
-          ? AlertStatus.values.firstWhere(
-              (e) => e.name == json['status'],
-              orElse: () => AlertStatus.idle,
-            )
-          : AlertStatus.idle,
+      uid: json['uid']?.toString() ?? '',
+      sentAt: sentAt,
+      alertType: AlertType.values.firstWhere(
+        (e) => e.name == json['alertType'],
+        orElse: () => AlertType.unknown,
+      ),
+      address: json['address']?.toString() ?? '',
+      senderName: json['senderName']?.toString() ?? '',
+      status: AlertStatus.values.firstWhere(
+        (e) => e.name == json['status'],
+        orElse: () => AlertStatus.idle,
+      ),
       availableActions: availableActions,
     );
   }
