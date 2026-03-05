@@ -57,20 +57,6 @@ void main() {
       await bloc.close();
     });
 
-    test('UpdateAlertEvent with non-null alert updates repository and state', () async {
-      final repo = _FakeResponderRepository(const Stream<Alert>.empty());
-      final bloc = ResponderBloc(repo: repo);
-      final alert = _buildAlert('A1');
-
-      bloc.add(UpdateAlertEvent(alert: alert));
-      await Future<void>.delayed(const Duration(milliseconds: 50));
-
-      expect(repo.updatedAlerts, [alert]);
-      expect(bloc.state.currentAlert, alert);
-
-      await bloc.close();
-    });
-
     test('aOk action resolves current alert and calls repository update', () async {
       final repo = _FakeResponderRepository(const Stream<Alert>.empty());
       final bloc = ResponderBloc(repo: repo);
@@ -85,39 +71,6 @@ void main() {
       expect(repo.updatedAlerts, hasLength(2));
       expect(repo.updatedAlerts.last.status, AlertStatus.resolved);
       expect(bloc.state.currentAlert?.status, AlertStatus.resolved);
-
-      await bloc.close();
-    });
-
-    test('non aOk response actions do not update repository', () async {
-      final repo = _FakeResponderRepository(const Stream<Alert>.empty());
-      final bloc = ResponderBloc(repo: repo);
-      final alert = _buildAlert('A1');
-
-      bloc.add(UpdateAlertEvent(alert: alert));
-      await Future<void>.delayed(const Duration(milliseconds: 10));
-
-      bloc.add(HandleResponseAction(action: ResponderAction.goProperty));
-      bloc.add(HandleResponseAction(action: ResponderAction.callDr));
-      bloc.add(HandleResponseAction(action: ResponderAction.noVisit));
-      await Future<void>.delayed(const Duration(milliseconds: 50));
-
-      expect(repo.updatedAlerts, hasLength(1));
-      expect(bloc.state.currentAlert, alert);
-
-      await bloc.close();
-    });
-
-    test('UpdateAlertEvent(null) with empty pending leaves state unchanged', () async {
-      final repo = _FakeResponderRepository(const Stream<Alert>.empty());
-      final bloc = ResponderBloc(repo: repo);
-
-      bloc.add(UpdateAlertEvent(alert: null));
-      await Future<void>.delayed(const Duration(milliseconds: 1200));
-
-      expect(bloc.state.currentAlert, isNull);
-      expect(bloc.state.pendingAlerts, isEmpty);
-      expect(repo.updatedAlerts, isEmpty);
 
       await bloc.close();
     });

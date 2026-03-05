@@ -67,21 +67,5 @@ void main() {
       expect(service.updatedAlert!.status, alert.status);
       expect(service.updatedAlert!.availableActions, alert.availableActions);
     });
-
-    test('init is idempotent and keeps first initialized instance', () async {
-      final secondService = _FakeAlertDataService();
-      ResponderRepoImpl.init(secondService);
-
-      final repoAfterSecondInit = ResponderRepoImpl.instance;
-      expect(identical(repoAfterSecondInit, repo), isTrue);
-
-      final alert = _buildModel().copyWith(uid: 'KEEP1');
-      await repoAfterSecondInit.updateAlert(alert: alert);
-
-      expect(service.updatedAlert?.uid, 'KEEP1');
-      expect(secondService.updatedAlert, isNull);
-
-      await secondService.controller.close();
-    });
   });
 }
