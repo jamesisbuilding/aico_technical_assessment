@@ -1,0 +1,63 @@
+Running `(cd /Users/jamespotter/.pub-cache/hosted/pub.dev/objective_c-9.3.0/; TMPDIR=/var/folders/sn/3_zvx8hs5bv0j350j5dqdlhc0000gn/T/ PATH=/Users/jamespotter/.antigravity/antigravity/bin:/Users/jamespotter/.nvm/versions/node/v22.22.0/bin:/opt/homebrew/opt/openjdk@11/bin:/Users/jamespotter/Developer/google-cloud-sdk/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/opt/homebrew/opt/openjdk@11/bin:/Users/jamespotter/Developer/Software/flutter/bin/:/Library/Frameworks/Python.framework/Versions/3.12/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Users/jamespotter/Developer/Software/flutter/bin/:/Users/jamespotter/.antigravity/antigravity/bin:/Users/jamespotter/.nvm/versions/node/v22.22.0/bin:/opt/homebrew/opt/openjdk@11/bin:/Users/jamespotter/Developer/google-cloud-sdk/bin:/Library/Frameworks/Python.framework/Versions/3.11/bin:/Library/Frameworks/Python.framework/Versions/3.12/bin:/Users/jamespotter/Developer/Software/flutter/bin:/Users/jamespotter/.pub-cache/bin:/Users/jamespotter/.lmstudio/bin:/Users/jamespotter/.local/bin:/Users/jamespotter/Developer/Software/flutter/bin:/Users/jamespotter/.pub-cache/bin:/Users/jamespotter/.lmstudio/bin:/Users/jamespotter/.local/bin HOME=/Users/jamespotter /Users/jamespotter/Developer/Software/flutter/bin/cache/dart-sdk/bin/dart --packages=/Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/package_config.json /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/objective_c/9fb02c5622/hook.dill --config=/Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/objective_c/9fb02c5622/input.json )`.
+INFO: 2026-03-05 11:57:52.081355: Running `which clang`.
+
+INFO: 2026-03-05 11:57:52.093524: Running `/usr/bin/clang --version`.
+
+INFO: 2026-03-05 11:57:52.215235: Running `/usr/bin/clang --version`.
+
+INFO: 2026-03-05 11:57:52.234381: Running: /usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -target arm64-apple-darwin -mmacos-version-min=12 -c /Users/jamespotter/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/include/dart_api_dl.c -fpic -I src -o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/include/dart_api_dl.c.o
+
+INFO: 2026-03-05 11:57:52.234688: Running: /usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -target arm64-apple-darwin -mmacos-version-min=12 -c /Users/jamespotter/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/objective_c.c -fpic -I src -o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/objective_c.c.o
+
+INFO: 2026-03-05 11:57:52.234860: Running: /usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -target arm64-apple-darwin -mmacos-version-min=12 -c /Users/jamespotter/.pub-cache/hosted/pub.dev/objective_c-9.3.0/test/util.c -fpic -I src -o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/test/util.c.o
+
+INFO: 2026-03-05 11:57:52.234970: Running: /usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -target arm64-apple-darwin -mmacos-version-min=12 -x objective-c -fobjc-arc -c /Users/jamespotter/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/input_stream_adapter.m -fpic -I src -o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-03-05 11:57:52.235069: Running: /usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -target arm64-apple-darwin -mmacos-version-min=12 -x objective-c -fobjc-arc -c /Users/jamespotter/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/objective_c.m -fpic -I src -o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/objective_c.m.o
+
+INFO: 2026-03-05 11:57:52.235232: Running: /usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -target arm64-apple-darwin -mmacos-version-min=12 -x objective-c -fobjc-arc -c /Users/jamespotter/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/observer.m -fpic -I src -o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/observer.m.o
+
+INFO: 2026-03-05 11:57:52.235325: Running: /usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -target arm64-apple-darwin -mmacos-version-min=12 -x objective-c -fobjc-arc -c /Users/jamespotter/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/ns_number.m -fpic -I src -o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/ns_number.m.o
+
+INFO: 2026-03-05 11:57:52.235412: Running: /usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -target arm64-apple-darwin -mmacos-version-min=12 -x objective-c -fobjc-arc -c /Users/jamespotter/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/protocol.m -fpic -I src -o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/protocol.m.o
+
+INFO: 2026-03-05 11:57:52.235501: Running: /usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -target arm64-apple-darwin -mmacos-version-min=12 -x objective-c -fobjc-arc -c /Users/jamespotter/.pub-cache/hosted/pub.dev/objective_c-9.3.0/src/objective_c_bindings_generated.m -fpic -I src -o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-03-05 11:57:52.355481: 
+INFO: 2026-03-05 11:57:52.355589: 
+INFO: 2026-03-05 11:57:52.355613: Generated /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/test/util.c.o
+
+INFO: 2026-03-05 11:57:52.355824: Generated /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/objective_c.c.o
+
+s_runner/shared/objective_c/build/9fb02c5622/obj/src/include/dart_api_dl.c.o
+INFO: 2026-03-05 11:57:52.355806: 
+INFO: 2026-03-05 11:57:52.355815: 
+
+INFO: 2026-03-05 11:57:52.357314: 
+INFO: 2026-03-05 11:57:52.357346: 
+INFO: 2026-03-05 11:57:52.357358: Generated /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/observer.m.o
+
+INFO: 2026-03-05 11:57:52.359375: 
+INFO: 2026-03-05 11:57:52.359402: 
+INFO: 2026-03-05 11:57:52.359414: Generated /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/protocol.m.o
+
+INFO: 2026-03-05 11:57:52.588383: 
+INFO: 2026-03-05 11:57:52.588420: 
+INFO: 2026-03-05 11:57:52.588431: Generated /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/ns_number.m.o
+
+INFO: 2026-03-05 11:57:52.596166: 
+INFO: 2026-03-05 11:57:52.596198: 
+INFO: 2026-03-05 11:57:52.596207: Generated /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/objective_c.m.o
+
+INFO: 2026-03-05 11:57:52.596445: Generated /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-03-05 11:57:52.609328: 
+INFO: 2026-03-05 11:57:52.609360: 
+INFO: 2026-03-05 11:57:52.609370: Generated /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-03-05 11:57:52.609618: Running: /usr/bin/clang -shared -Wl,-encryptable -undefined dynamic_lookup -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk -target arm64-apple-darwin -mmacos-version-min=12 /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/include/dart_api_dl.c.o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/objective_c.c.o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/test/util.c.o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/input_stream_adapter.m.o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/objective_c.m.o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/observer.m.o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/ns_number.m.o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/protocol.m.o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/obj/src/objective_c_bindings_generated.m.o -o /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/objective_c.dylib
+
+INFO: 2026-03-05 11:57:52.748281: 
+INFO: 2026-03-05 11:57:52.748355: 
+INFO: 2026-03-05 11:57:52.748397: Generated /Users/jamespotter/Developer/aico_test/core/design_system/.dart_tool/hooks_runner/shared/objective_c/build/9fb02c5622/objective_c.dylib
+
